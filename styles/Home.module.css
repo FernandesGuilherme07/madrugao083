@@ -1,0 +1,175 @@
+.container {
+  background-color: #FFF;
+}
+
+.header {
+  background-color: #F9F9FB;
+  padding: 50px 24px 30px 24px;
+}
+
+.headerTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 27px;
+}
+
+@media (min-width: 1200px){
+  .headerTop{
+ padding: 0 10%;
+  }
+  .headerBottom {
+    padding: 0 10%;
+  }
+}
+
+@media (max-width: 430px){
+  .headerTopRight {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+  }
+}
+
+.headerTopLogo {
+  display: flex;
+  align-items: center;
+  gap: 1rem
+}
+
+.subtitlesBody {
+  color: #1B1B1B;
+  padding: 2rem 1rem;
+  font-size: 2rem;
+}
+
+.headerTitle {
+  font-weight: 500;
+  font-size: 24px;
+  color: #1B1B1B;
+}
+
+
+
+.headerSubtitle {
+  font-weight: 400;
+  font-size: 16px;
+  color: rgba(151, 151, 151, 0.8);
+}
+
+.headerTopRight {
+  max-width: 1200px;
+  background-color: #e6d6c4;
+  border-radius: 2.5rem;
+  padding: 1rem .8rem;
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cartButton {
+  width: 2rem;
+    font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: none;
+  cursor: pointer;
+  position: relative;
+  color: #FB9400;
+}
+
+.cartStatus {
+  background-color: red;
+  width: 15px;
+  height: 15px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  color: white;
+  font-size: 11px;
+  font-weight: 600;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menuButton {
+  width: 18px;
+  height: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.menuButtonLine {
+  background-color: #000;
+  height: 2px;
+}
+
+.gridContainer {
+
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: 100vh;
+  padding: 30px;;
+}
+
+.gridContent {
+
+}
+
+.grid {
+  display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 2fr));
+    gap: 1rem;
+    padding: 1rem;
+}
+
+/* @media (min-width: 1050px){
+  .grid{
+  margin: 0 15%;
+  grid-template-columns: repeat(3, 1fr);
+  }
+  .subtitlesBody {
+    margin: 0 15%;
+  }
+}
+
+@media (min-width: 1600px){
+  .grid{
+  margin: 0 20%;
+  grid-template-columns: repeat(4, 1fr);
+  }
+  .subtitlesBody {
+    margin: 0 20%;
+  }
+} */
+
+.searchText {
+  margin: 24px;
+  font-weight: 400;
+  font-size: 16px;
+  color: #979797;
+}
+
+.searchText strong {
+  font-weight: 600;
+}
+
+.noProducts {
+  width: 235px;
+  margin: 88px auto;
+}
+
+.noProductsText {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 29px;
+  color: #CDCDCD;
+  text-align: center;
+  margin-top: 32px;
+}
