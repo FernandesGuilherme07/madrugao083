@@ -11,8 +11,8 @@ const Home: NextPage = () => {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Welcome to Next Delivery!</title>
-        <link rel="shortcut icon" href="/favicon.ico" />
+        <title>Madrugâo083 Burguer!</title>
+        <link rel="shortcut icon" href="/temp/AVATAR.png" />
       </Head>
       <div className={styles.mainArea}>
         <Button 
