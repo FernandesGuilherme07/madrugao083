@@ -177,7 +177,7 @@ const Home = (data: Props) => {
             )}
           </div>
 
-          {/* <h2 className={styles.subtitlesBody} >Combos</h2>
+          <h2 className={styles.subtitlesBody} >Combos</h2>
             <div className={styles.grid}>        
             {products.map((item, index) => 
               item.categoryName === "combo" && (
@@ -188,7 +188,7 @@ const Home = (data: Props) => {
               ) 
              
             )}
-          </div> */}
+          </div>
         </>
       }
       </main>
