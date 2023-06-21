@@ -136,7 +136,6 @@ const ProductPage = ({ product, tenant }: Props) => {
 
       <div className={styles.description}>{product.description}</div>
 
-      <div className={styles.description}>{product.description}</div>
 
 {product.aditionals?.map((prod: any) => (
   <div key={`${prod.id}-${prod.name}`} className={styles.aditional}>
@@ -151,8 +150,6 @@ const ProductPage = ({ product, tenant }: Props) => {
     </div>
   </div>
 ))}
-
-      <div className={styles.description}>{product.description}</div>
 
       <div className={styles.qtText}>Quantidade</div>
 
