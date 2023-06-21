@@ -14,7 +14,7 @@ import { Tenant } from '../../types/Tenant';
 import { getCookie } from 'cookies-next';
 import { User } from '../../types/User';
 import { useAuthContext } from '../../contexts/auth';
-import NoItemsIcon from '../../public/assets/noitems.svg';
+// import NoItemsIcon from '../../public/assets/noitems.svg';
 import { CartItem } from '../../types/CartItem';
 import Image from 'next/image';
 import { url } from 'inspector';
@@ -74,12 +74,12 @@ const Home = (data: Props) => {
       <header className={styles.header}>
         <div className={styles.headerTop}>
           <div className={styles.headerTopLogo}>
-            <img
+            {/* <img
             width={80}
             src="/temp/AVATAR.png"
             alt="Logo da hmaburgueria MAdrugão083" 
             />
-          
+           */}
           <div className={styles.headerTopLeft}>
             <div className={styles.headerTitle}>Seja Bem Vindo (a) 👋</div>
             {verificarStatusLanchonete() ? (
