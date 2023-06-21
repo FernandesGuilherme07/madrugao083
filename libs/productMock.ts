@@ -261,7 +261,7 @@ export const productsMock: Product[] = [
     },
     {   
     id: 17,
-    image: "/temp/combo-pijama.png",
+    image: "/temp/combo-festa.png",
     categoryName: "combo",
     name: "Festa do pijama",
     description: "Três Smashs Burguers + coca lata + vitamina de cupuaçú",
@@ -271,37 +271,10 @@ export const productsMock: Product[] = [
     id: 15,
     image: "/temp/combo-proibidao.png",
     categoryName: "combo",
-    name: "Proibidão + porção de bacon extra",
-    description: "Dois Big Burguers + 2 budweiser long neck",
+    name: "Proibidão",
+    description: "Dois Big Burguers + 2 budweiser long neck + porção de bacon extra",
     price: 7.00,
     },
-    {   
-    id: 15,
-    image: "/temp/budweiser.png",
-    categoryName: "bebida",
-    name: "budweiser long neck",
-    price: 7.00,
-    },
-    {   
-    id: 15,
-    image: "/temp/budweiser.png",
-    categoryName: "bebida",
-    name: "budweiser long neck",
-    price: 7.00,
-    },
-    {   
-    id: 15,
-    image: "/temp/budweiser.png",
-    categoryName: "bebida",
-    name: "budweiser long neck",
-    price: 7.00,
-    },
-    {   
-    id: 15,
-    image: "/temp/budweiser.png",
-    categoryName: "bebida",
-    name: "budweiser long neck",
-    price: 7.00,
-    },
+
 ];
 
