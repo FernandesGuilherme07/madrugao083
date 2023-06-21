@@ -74,12 +74,12 @@ const Home = (data: Props) => {
       <header className={styles.header}>
         <div className={styles.headerTop}>
           <div className={styles.headerTopLogo}>
-            {/* <img
+            <Image
             width={80}
             src="/temp/AVATAR.png"
             alt="Logo da hmaburgueria MAdrugão083" 
             />
-           */}
+          
           <div className={styles.headerTopLeft}>
             <div className={styles.headerTitle}>Seja Bem Vindo (a) 👋</div>
             {verificarStatusLanchonete() ? (
@@ -129,7 +129,7 @@ const Home = (data: Props) => {
           
           {filteredProducts.length === 0 &&
             <div className={styles.noProducts}>
-              <NoItemsIcon color="#E0E0E0" />
+              {/* <NoItemsIcon color="#E0E0E0" /> */}
               <div className={styles.noProductsText}>Ops! Não há itens com este nome</div>
             </div>
           }
