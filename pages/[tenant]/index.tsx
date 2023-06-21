@@ -74,7 +74,7 @@ const Home = (data: Props) => {
       <header className={styles.header}>
         <div className={styles.headerTop}>
           <div className={styles.headerTopLogo}>
-            <Image
+            <img
             width={80}
             src="/temp/AVATAR.png"
             alt="Logo da hmaburgueria MAdrugão083" 
