@@ -1,0 +1,27 @@
+import { observer } from "mobx-react-lite";
+import styles from "./styles.module.css";
+
+type Props = {
+    color: string;
+    label: string;
+    onClick: () => void;
+    fill?: boolean;
+    disabled?: boolean;
+}
+
+export const Button = observer(({ color, label, onClick, fill, disabled }: Props) => {
+    return (
+        <div
+            className={styles.container}
+            onClick={!disabled ? onClick : () => { }}
+            style={{
+                color: fill ? "#FFF" : color,
+                borderColor: color,
+                backgroundColor: fill ? color : "transparent",
+                opacity: disabled ? .4 : 1,
+            }}
+        >
+            {label}
+        </div>
+    );
+})
