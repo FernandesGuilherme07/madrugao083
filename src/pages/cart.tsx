@@ -33,7 +33,6 @@ const Cart = () => {
 
   const cartStore = useContext(cartContext);
   const useFormatter = formatter();
-  const router = useRouter();
 
   // Product control
   const [cart, setCart] = useState<CartItem[]>([]);

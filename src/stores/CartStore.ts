@@ -11,14 +11,13 @@ class CartStore implements ICartStore{
     itens: CartItem[] = [];
   
     constructor() {
-      this.itens = [];
       makeObservable(this, {
         itens: observable,
         AddItem: action,
         RemoveItem: action,
         GetItemToCartById: action,
         PriceToProductWithAdicional: action,
-        ClearCart: action,
+        ClearCart: action.bound,
         totalPrice: computed,
         quatityItensToCart: computed,
       });
