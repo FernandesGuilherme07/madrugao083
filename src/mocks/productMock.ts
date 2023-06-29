@@ -238,21 +238,21 @@ export const productsMock: Product[] = [
         price: 4.50
     },
     {   
-    id: 14,
+    id: 15,
     image: "/temp/eisenbahn.png",
     categoryName: "bebida",
     name: "cerveja Eisenbahn long neck",
     price: 7.00,
     },
     {   
-    id: 15,
+    id: 16,
     image: "/temp/budweiser.png",
     categoryName: "bebida",
     name: "cerveja Budweiser long neck",
     price: 7.00,
     },
     {   
-    id: 16,
+    id: 17,
     image: "/temp/combo-trio.png",
     categoryName: "combo",
     description: "Três Burguers(double smash, big bacon e especial da casa) + porção de molho especial extra + duas coca-colas lata",
@@ -260,7 +260,7 @@ export const productsMock: Product[] = [
     price: 59.90,
     },
     {   
-    id: 17,
+    id: 18,
     image: "/temp/combo-festa.png",
     categoryName: "combo",
     name: "Festa do pijama",
@@ -268,7 +268,7 @@ export const productsMock: Product[] = [
     price: 40.90,
     },
     {   
-    id: 18,
+    id: 19,
     image: "/temp/combo-proibidao.png",
     categoryName: "combo",
     name: "Proibidão",
