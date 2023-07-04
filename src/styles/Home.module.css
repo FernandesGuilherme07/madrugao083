@@ -16,6 +16,10 @@
   margin-bottom: 27px;
 }
 
+.headerLogo {
+  margin-right: 1rem;
+}
+
 .categories {
   display: flex;
   justify-content: center;
@@ -103,7 +107,8 @@
 .headerTopLogo {
   display: flex;
   align-items: center;
-  gap: 1rem
+  gap: 1rem;
+  margin-right: 1rem;
 }
 
 .subtitlesBody {
@@ -113,8 +118,9 @@
 }
 
 .headerTitle {
+  white-space: nowrap;
   font-weight: 500;
-  font-size: 24px;
+  font-size: 1.4rem;
   color: #1B1B1B;
 }
 
