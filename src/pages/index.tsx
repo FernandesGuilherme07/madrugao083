@@ -14,6 +14,7 @@ import Head from 'next/head';
 import { GetServerSideProps } from 'next';
 import { establishmentMock } from 'src/mocks/establishmentMock';
 import { EstablishmentIsOpen } from 'src/utils/EstablishmentIsOpen';
+import { PopupInstallPwa } from 'src/components/PopupInstallPwa';
 
 
 const Home = observer(({ products }: props) => {
@@ -50,6 +51,9 @@ const Home = observer(({ products }: props) => {
         <link rel="shortcut icon" href="/temp/AVATAR.png" />
         <meta name="theme-color" color='#FB9400'/>
       </Head>
+      
+      <PopupInstallPwa /> 
+      
       <div className={styles.container}>
         <header className={styles.header}>
           <div className={styles.headerTop}>
