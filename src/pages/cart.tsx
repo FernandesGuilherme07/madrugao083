@@ -64,7 +64,7 @@ const Cart = () => {
     setLoadingVisible(true);
   
     try {
-      const deliveryInfo = await deliveryStore.CalculateFreightAndHandleLocale(shippingInput);
+      const deliveryInfo = await deliveryStore.CalculateFreightAndHandleLocale(shippingInput.replace(/-/g, ''));
 
       if(EstablishmentIsOpen())  window.alert("Hamburgueria fechada no momento, abre novamente às 22horas.")   
       else if (deliveryInfo && deliveryInfo.PriceDelivery > 20) {
@@ -136,7 +136,7 @@ const Cart = () => {
         <div className={styles.shippingForm}>
           <InputField
             color={establishmentMock.primaryColor}
-            placeholder="Digite seu frete"
+            placeholder="Digite seu CEP"
             value={shippingInput}
             onChange={(e: any) => setShippingInput(e)}
           />
