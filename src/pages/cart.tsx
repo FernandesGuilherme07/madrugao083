@@ -66,7 +66,10 @@ const Cart = () => {
     try {
       const deliveryInfo = await deliveryStore.CalculateFreightAndHandleLocale(shippingInput.replace(/-/g, ''));
 
-      if(!EstablishmentIsOpen())  window.alert("Hamburgueria fechada no momento, abre novamente às 22horas.")   
+      if(EstablishmentIsOpen()) {
+        window.alert("Hamburgueria fechada no momento, abre novamente às 22horas.")   
+        setLoadingVisible(false);
+      } 
       else if (deliveryInfo && deliveryInfo.PriceDelivery > 20) {
         setShippingAddress(` ${deliveryInfo.street} - ${deliveryInfo.neighborhood} - ${deliveryInfo.localidade}`);
         setShippingPrice(0.00);
