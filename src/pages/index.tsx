@@ -46,7 +46,9 @@ const Home = observer(({ products }: props) => {
     <>
       <Head>
         <title>Madrugâo083 Burguer!</title>
+        <link rel="manifest" href="/manifest.json" />
         <link rel="shortcut icon" href="/temp/AVATAR.png" />
+        <meta name="theme-color" color='#FB9400'/>
       </Head>
       <div className={styles.container}>
         <header className={styles.header}>

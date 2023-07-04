@@ -1,0 +1,21 @@
+{
+    "name": "Madrugão083 - Burguer",
+    "short_name": "Madrugão083",
+    "icons": [
+      {
+        "src": "/temp/AVATAR.png",
+        "type": "image/png",
+        "sizes": "192x192"
+      },
+      {
+        "src": "/temp/AVATAR.png",
+        "type": "image/png",
+        "sizes": "512x512"
+      }
+    ],
+    "background_color": "#fff",
+    "description": "A melhor hamburgueria artesanal de joao pessoa.",
+    "display": "fullscreen",
+    "start_url": "/",
+    "theme_color": "#FB9400"
+  }
