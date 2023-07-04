@@ -47,7 +47,7 @@
 .containerPopup p {
   font-size: 1.9rem;
   text-align: center;
-  margin-bottom: 1rem;
+  margin: 1rem 0;
 }
 
 .img {
@@ -64,12 +64,12 @@
 }
 
 .containerPopup button {
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   font-weight: 800;
   text-transform: uppercase;
   background-color: #FB9400;
   width: 100%;
-  padding: 1.4rem 0;
+  padding: 1rem 0;
   border-radius: 0.8rem;
   margin-top: auto;
   transition: background-color 0.2s linear;

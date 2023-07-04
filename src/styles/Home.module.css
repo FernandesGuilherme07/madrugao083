@@ -1,5 +1,7 @@
 .container {
   background-color: #FFF;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 .header {
@@ -14,16 +16,83 @@
   margin-bottom: 27px;
 }
 
-@media (min-width: 1200px){
-  .headerTop{
- padding: 0 10%;
+.categories {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-x: auto;
+  padding: 10px 0;
+  margin-bottom: 20px;
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+
+.categories::-webkit-scrollbar {
+  width: 5px;
+}
+
+.categories::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+.categories::-webkit-scrollbar-thumb {
+  background-color: transparent;
+}
+
+.categoryButton {
+  background-color: #FFF;
+  color: #000;
+  border: none;
+  padding: 8px 16px;
+  margin: 0 5px; /* Espaçamento entre os botões */
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  white-space: nowrap;
+}
+
+.categoryButton:first-child {
+  margin-left: 10px; /* Adiciona um espaço inicial */
+}
+
+.categoryButton.active {
+  background-color: #FB9400;
+  color: #FFF;
+}
+
+@media (max-width: 430px) {
+  .categories {
+    justify-content: flex-start; /* Alinha as categorias à esquerda */
+    padding-left: 10px; /* Adiciona um espaço à esquerda */
+    padding-right: 10px; /* Adiciona um espaço à direita */
+    overflow-x: auto;
+    overflow-y: hidden;
+    margin-bottom: 20px;
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+  }
+
+  .categoryButton {
+    margin-right: 10px; /* Espaçamento entre os botões */
+  }
+
+  .categoryButton:last-child {
+    margin-right: 0; /* Remove o espaçamento do último botão */
+  }
+}
+
+
+@media (min-width: 1200px) {
+  .headerTop {
+    padding: 0 10%;
   }
   .headerBottom {
     padding: 0 10%;
   }
 }
 
-@media (max-width: 430px){
+@media (max-width: 430px) {
   .headerTopRight {
     position: fixed;
     bottom: 1rem;
@@ -49,8 +118,6 @@
   color: #1B1B1B;
 }
 
-
-
 .headerSubtitle {
   font-weight: 400;
   font-size: 16px;
@@ -62,7 +129,6 @@
   background-color: #e6d6c4;
   border-radius: 2.5rem;
   padding: 1rem .8rem;
-  
   display: flex;
   align-items: center;
   justify-content: center;
@@ -70,7 +136,7 @@
 
 .cartButton {
   width: 2rem;
-    font-size: 1.5rem;
+  font-size: 1.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -110,11 +176,11 @@
 }
 
 .gridContainer {
-
   max-width: 1200px;
   margin: 0 auto;
   min-height: 100vh;
-  padding: 30px;;
+  padding: 30px;
+  box-sizing: border-box;
 }
 
 .gridContent {
@@ -123,30 +189,10 @@
 
 .grid {
   display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 2fr));
-    gap: 1rem;
-    padding: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 2fr));
+  gap: 1rem;
+  padding: 1rem;
 }
-
-/* @media (min-width: 1050px){
-  .grid{
-  margin: 0 15%;
-  grid-template-columns: repeat(3, 1fr);
-  }
-  .subtitlesBody {
-    margin: 0 15%;
-  }
-}
-
-@media (min-width: 1600px){
-  .grid{
-  margin: 0 20%;
-  grid-template-columns: repeat(4, 1fr);
-  }
-  .subtitlesBody {
-    margin: 0 20%;
-  }
-} */
 
 .searchText {
   margin: 24px;

@@ -23,8 +23,11 @@ const Home = observer(({ products }: props) => {
   const [searchText, setSearchText] = useState('');
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
   const [categories, setCategories] = useState<string[]>([]);
+  const [activeCategory, setActiveCategory] = useState<string >("Burguers");
 
-
+  const toggleCategory = (category: string) => {
+    setActiveCategory(category);
+  };
   
   useEffect(() => {
     let newFilteredProducts: Product[] = [];
@@ -107,18 +110,24 @@ const Home = observer(({ products }: props) => {
             {!searchText && (
               <>
                 {/* <Banner /> */}
-                {categories.map((category, index) => (
-                  <div key={index}>
-                    <h2 className={styles.subtitlesBody}>{category}</h2>
-                    <div className={styles.grid}>
-                      {products.map((item, itemIndex) =>
-                        item.categoryName === category ? (
-                          <ProductItem key={itemIndex} data={item} />
-                        ) : null
-                      )}
-                    </div>
-                  </div>
-                ))}
+                <div className={styles.categories}>
+                  {categories.map((category, index) => (
+                    <button
+                      key={index}
+                      className={`${styles.categoryButton} ${activeCategory === category ? styles.active : ''}`}
+                      onClick={() => toggleCategory(category)}
+                    >
+                      {category}
+                    </button>
+                  ))}
+                </div>
+                <div className={styles.grid}>
+                  {products.map((item, itemIndex) =>
+                    item.categoryName === activeCategory ? (
+                      <ProductItem key={itemIndex} data={item} />
+                    ) : null
+                  )}
+                </div>
               </>
             )}
           </main>
