@@ -12,6 +12,8 @@ import { cartContext } from 'src/contexts/CartContext';
 import { formatter } from 'src/utils/formatter';
 import { formatMinutesToHours } from 'src/utils/formatMinutesToHours';
 import { useRouter } from 'next/router';
+import { establishmentMock } from 'src/mocks/establishmentMock';
+import { LoadingApp } from '../LoadingApp/LoadingApp';
 
 type Props = {
   shippingAddress: string;
@@ -34,6 +36,11 @@ export const ModalCheckout = observer(({ onClose, shippingAddress, shippingTime,
     changeOption: false,
     changeAmount: "",
   });
+  const [loadingVisible, setLoadingVisible] = useState(false);
+  const [deliveryLoading, setDeliveryLoading] = useState({
+    isStopped: false,
+    isPaused: false
+  });
 
   const useFormatter = formatter();
 
@@ -55,7 +62,7 @@ export const ModalCheckout = observer(({ onClose, shippingAddress, shippingTime,
       const itemsMessage = itens.map((item) => {
         const aditionalsMessage = item.aditionals
           ? item.aditionals
-              .map((aditional) => `${aditional.name} - R$${aditional.price}`)
+              .map((aditional) => `${aditional.name} - ${useFormatter.formatPrice(aditional.price)}`)
               .join(", ")
               .replace(/\n/g, "\n ")
           : "";
@@ -85,26 +92,37 @@ export const ModalCheckout = observer(({ onClose, shippingAddress, shippingTime,
   
   Itens:
   ${itemsMessage.join("\n")}
-  Preço da entrega: R$${useFormatter.formatPrice(shippingPrice)}
   Subtotal: ${useFormatter.formatPrice(totalPrice)}
+  Preço da entrega: ${useFormatter.formatPrice(shippingPrice)}
   Total: ${useFormatter.formatPrice(shippingPrice + totalPrice)}`;
   
       const mensagemEncoded = encodeURIComponent(mensagem);
       const numeroWhatsApp = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER;
   
-      ClearCart()
-      router.push("/")
-      window.open(`https://api.whatsapp.com/send?phone=${numeroWhatsApp}&text=${mensagemEncoded}`);
-      setFormData({
-        addressNumber: "",
-        complement: "",
-        reference: "",
-        contactNumber: "",
-        name: "",
-        paymentMethod: "",
-        changeOption: false,
-        changeAmount: "",
-      }) 
+      ClearCart();
+      setLoadingVisible(true);
+      setTimeout(() => {
+        try {
+          window.open(`https://api.whatsapp.com/send?phone=${numeroWhatsApp}&text=${mensagemEncoded}`);
+         
+        } catch (error) {
+          console.log(error)
+        }
+      }, 4500);
+      setTimeout(() => {
+        setFormData({
+          addressNumber: "",
+          complement: "",
+          reference: "",
+          contactNumber: "",
+          name: "",
+          paymentMethod: "",
+          changeOption: false,
+          changeAmount: "",
+        });
+        setLoadingVisible(false);
+        router.push("/");
+      }, 6000);
     } else {
       window.alert("Preencha os campos corretamente");
     }
@@ -132,6 +150,13 @@ export const ModalCheckout = observer(({ onClose, shippingAddress, shippingTime,
 
       return (
         <div className={`${styles.modalOverlay} ${styles.active}`}>
+           {loadingVisible && (
+          <LoadingApp
+            isPaused={deliveryLoading.isPaused}
+            isStopped={deliveryLoading.isStopped}
+          />
+        )}
+
           <div className={`${styles.modalContent} ${styles.active}`}>
           <button className={styles.closeButton} onClick={onClose}>X</button>
         
@@ -222,7 +247,7 @@ export const ModalCheckout = observer(({ onClose, shippingAddress, shippingTime,
                     onClick={() =>handleButtonClick("cartão")}
                   >
                     <FaCreditCard />
-                    <span style={{ marginLeft: "5px"}}>cartão</span>
+                    <span style={{ marginLeft: "5px"}}>Link</span>
                   </button>
 
                   <button
@@ -242,7 +267,7 @@ export const ModalCheckout = observer(({ onClose, shippingAddress, shippingTime,
               </div>
               {formData.paymentMethod === "dinheiro" && (
                 <div className={styles.formGroup}>
-                  <label htmlFor="changeOption">Gostaria de Toco?</label>
+                  <label htmlFor="changeOption">Gostaria de Troco?</label>
                   <input
                     type="checkbox"
                     id="changeOption"
@@ -266,7 +291,7 @@ export const ModalCheckout = observer(({ onClose, shippingAddress, shippingTime,
               )}
               <div className={styles.buttonArea}>
                 <Button
-                  color={"#FB9400"}
+                  color={establishmentMock.primaryColor}
                   label="Enviar Pedido"
                   onClick={() => handleEnviarPedido()}
                   fill

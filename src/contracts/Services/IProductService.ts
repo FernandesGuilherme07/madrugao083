@@ -1,4 +1,4 @@
-import { Product } from "src/model/Product";
+import { Product } from "src/models/Product";
 
 export interface IProductService {
     GetAllProducts(): Promise<Product[]>

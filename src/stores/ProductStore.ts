@@ -1,7 +1,7 @@
 import { action, makeObservable, observable } from "mobx";
-import { IProductService } from "src/constracts/Services/IProductService";
-import { IProductStore } from "src/constracts/Stores/IProductStore";
-import { Product } from "src/model/Product";
+import { IProductService } from "src/contracts/Services/IProductService";
+import { IProductStore } from "src/contracts/Stores/IProductStore";
+import { Product } from "src/models/Product";
 
 export class ProductStore implements IProductStore {
     product: Product[] = [];

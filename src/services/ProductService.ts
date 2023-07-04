@@ -1,6 +1,6 @@
-import { IProductService } from "src/constracts/Services/IProductService";
-import { productsMock } from "src/mock/productMock";
-import { Product } from "src/model/Product";
+import { IProductService } from "src/contracts/Services/IProductService";
+import { productsMock } from "src/mocks/productMock";
+import { Product } from "src/models/Product";
 
 class ProductService implements IProductService {
     async GetProductById(id: number): Promise<Product> {

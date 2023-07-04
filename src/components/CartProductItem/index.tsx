@@ -1,13 +1,13 @@
 
-import { Product } from 'src/model/Product';
+import { Product } from 'src/models/Product';
 import { Quantity } from '../Quantity';
 import styles from './styles.module.css';
 import { formatter } from 'src/utils/formatter';
 import { useContext, useEffect, useState } from 'react';
 import { observer } from 'mobx-react';
-import { productStore } from 'src/container/Product';
+import { productStore } from 'src/containers/Product';
 import { cartContext } from 'src/contexts/CartContext';
-import { CartItem } from 'src/model/CartItem';
+import { CartItem } from 'src/models/CartItem';
 
 type Props = {
     color: string;
@@ -78,7 +78,6 @@ export const CartProductItem = observer(({ color, quantity, productId, cartId, o
                     <Quantity 
                         color={color}
                         count={quantity}
-                        onUpdateCount={(newCount: number) => onChange(newCount, product?.id ? product.price : 0)}
                         cartItem={cartstore.GetItemToCartById(cartId)}
                         min={0}
                         max={10}

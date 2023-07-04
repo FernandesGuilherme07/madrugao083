@@ -4,19 +4,19 @@ import { useRouter } from 'next/router';
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import { observer } from "mobx-react";
-import Cookies from 'js-cookie';
 
 import { Button } from 'src/components/Button';
 import { Header } from 'src/components/Header';
 import { Quantity } from 'src/components/Quantity';
 import { cartContext } from 'src/contexts/CartContext';
-import { productStore } from 'src/container/Product';
+import { productStore } from 'src/containers/Product';
 import { formatter } from 'src/utils/formatter';
 import { UniqueIdGenerator } from 'src/utils/UniqueIdGenerator';
-import { CartItem } from 'src/model/CartItem';
-import { Product } from 'src/model/Product';
+
+import { Product } from 'src/models/Product';
 
 import styles from 'src/styles/Product-id.module.css';
+import { establishmentMock } from 'src/mocks/establishmentMock';
 
 interface Props {
   product: Product;
@@ -37,38 +37,39 @@ type Aditional = {
   const fixPrice = formatter();
 
 const ProductPage = observer(({ product }: Props) => {
-  const cartStore = useContext(cartContext)
+  const cartStore = useContext(cartContext);
   const [adicionaisMarcados, setAdicionaisMarcados] = useState<Record<string, AdicionalState>>({});
-  const [aditionalsToProduct, setAditionalsToProduct] = useState<Aditional[]>([])
+  const [aditionalsToProduct, setAditionalsToProduct] = useState<Aditional[]>([]);
   const [qtCount, setQtCount] = useState(1);
   const [price, setPrice] = useState(product.price * qtCount);
 
-  const router = useRouter()
-
+  const router = useRouter();
 
   useEffect(() => {
-
-    let precoTotal = product!.price * qtCount;
-    for (const adicionalId in adicionaisMarcados) {
-      const adicional = adicionaisMarcados[adicionalId];
-      if (adicional && adicional.selected) {
-        precoTotal += adicional.price;
-      }
-    }
+    const precoTotal = (product.price + getSelectedAditionalsTotalPrice()) * qtCount;
     setPrice(precoTotal);
   }, [qtCount, adicionaisMarcados, product]);
 
-  const handleCheckboxChange = (adicional: Aditional) => {
+  const getSelectedAditionalsTotalPrice = (): number => {
+    let totalPrice = 0;
+    for (const adicionalId in adicionaisMarcados) {
+      const adicional = adicionaisMarcados[adicionalId];
+      if (adicional && adicional.selected) {
+        totalPrice += adicional.price;
+      }
+    }
+    return totalPrice;
+  };
 
-    const aditionalRemoved = aditionalsToProduct.filter(ad => ad === adicional)
+  const handleCheckboxChange = (adicional: Aditional) => {
     setAdicionaisMarcados((prevAdicionaisMarcados) => {
       const updatedAdicionaisMarcados: any = { ...prevAdicionaisMarcados };
-        
+
       if (updatedAdicionaisMarcados[adicional.id]) {
-        setAditionalsToProduct(aditionalRemoved)
+        setAditionalsToProduct((prevAditionals) => prevAditionals.filter((ad) => ad !== adicional));
         updatedAdicionaisMarcados[adicional.id].selected = !updatedAdicionaisMarcados[adicional.id].selected;
       } else {
-        setAditionalsToProduct([...aditionalsToProduct, adicional])
+        setAditionalsToProduct((prevAditionals) => [...prevAditionals, adicional]);
         updatedAdicionaisMarcados[adicional.id] = {
           id: adicional.id,
           selected: true,
@@ -79,31 +80,32 @@ const ProductPage = observer(({ product }: Props) => {
       return updatedAdicionaisMarcados;
     });
   };
-
   const handleAddToCart = async () => {
-    let cart: CartItem[] = [];
+    const { id } = product;
+    const totalPrice = cartStore.PriceToProductWithAdicional(id);
 
-    const cartCookie = Cookies.get('cart');
-    if (typeof cartCookie === 'string') {
-      const cartJson: CartItem[] = JSON.parse(cartCookie);
-      for (let i in cartJson) {
-        if (cartJson[i].qt && cartJson[i].productId) {
-          cart.push(cartJson[i]);
-        }
-      }
-    }
-
-    const { id, price } = product;
-      await cartStore.AddItem({id: UniqueIdGenerator.generateUniqueId() , productId: id, prdouctName: product.name, productPrice: price, aditionals:  aditionalsToProduct , qt: qtCount })
-      cart.push({id: UniqueIdGenerator.generateUniqueId() , productId: id, productPrice: price, prdouctName: product.name, aditionals:  aditionalsToProduct , qt: qtCount });
+  
+    await cartStore.AddItem({
+      id: UniqueIdGenerator.generateUniqueId(),
+      productId: id,
+      prdouctName: product.name,
+      productPrice: price / qtCount,
+      aditionals: aditionalsToProduct,
+      qt: qtCount,
+    });
     
+    // Atualizar o console.log para acessar o getter totalPrice após adicionar o item
+    console.log(cartStore.totalPrice);
+  
     // going to cart
     router.push(`/cart`);
   };
+  
 
   const handleUpdateQt = (newCount: number) => {
     setQtCount(newCount);
   };
+
 
   return (
     <div className={styles.container}>
@@ -116,7 +118,7 @@ const ProductPage = observer(({ product }: Props) => {
       </Head> 
       <div className={styles.headerArea}>
         <Header
-          color={"#FB9400"}
+          color={establishmentMock.primaryColor}
           backHref={`/`}
           title="Produto"
           invert
@@ -124,7 +126,7 @@ const ProductPage = observer(({ product }: Props) => {
       </div>
       <div
         className={styles.headerBg}
-        style={{ backgroundColor: "#FB9400" }}
+        style={{ backgroundColor: establishmentMock.primaryColor }}
       ></div>
 
       <div className={styles.productImage}>
@@ -134,7 +136,7 @@ const ProductPage = observer(({ product }: Props) => {
       <div className={styles.category}>{product.categoryName}</div>
       <div
         className={styles.title}
-        style={{ borderBottomColor: "#FB9400" }}
+        style={{ borderBottomColor: establishmentMock.primaryColor }}
       >
         {product.name}
       </div>
@@ -143,28 +145,28 @@ const ProductPage = observer(({ product }: Props) => {
       <div className={styles.description}>{product.description}</div>
 
 
-{product.aditionals?.map((prod: any) => (
-  <div key={`${prod.id}-${prod.name}`} className={styles.aditional}>
-    <div>{prod.name}</div>
-    <div>
-      {`R$${fixPrice.formatPrice(prod.price)}`}
-      {" "}
-      <input
-        type="checkbox"
-        checked={adicionaisMarcados[prod.id]?.selected}
-        onChange={() => handleCheckboxChange(prod)}
-      />
-    </div>
-  </div>
-))}
-
+      {product.aditionals &&
+        product.aditionals.map((prod: any) => (
+          <div key={`${prod.id}-${prod.name}`} className={styles.aditional}>
+            <div>{prod.name}</div>
+            <div>
+              {`R$${fixPrice.formatPrice(prod.price)}`}
+              {" "}
+              <input
+                type="checkbox"
+                checked={adicionaisMarcados[prod.id]?.selected}
+                onChange={() => handleCheckboxChange(prod)}
+              />
+            </div>
+          </div>
+        ))}
       <div className={styles.qtText}>Quantidade</div>
 
       <div className={styles.area}>
         <div className={styles.areaLeft}>
           <Quantity
            
-            color={"#FB9400"}
+            color={establishmentMock.primaryColor}
             count={qtCount}
             onUpdateCount={handleUpdateQt}
             min={1}
@@ -172,7 +174,7 @@ const ProductPage = observer(({ product }: Props) => {
         </div>
         <div
           className={styles.areaRight}
-          style={{ color: "#FB9400" }}
+          style={{ color: establishmentMock.primaryColor }}
         >
           {fixPrice.formatPrice(price)}
         </div>
@@ -180,7 +182,7 @@ const ProductPage = observer(({ product }: Props) => {
 
       <div className={styles.buttonArea}>
         <Button
-          color={"#FB9400"}
+          color={establishmentMock.primaryColor}
           label="Adicionar ao carrinho"
           onClick={handleAddToCart}
           fill

@@ -1,5 +1,5 @@
-import { CoordinatesDto } from "src/constracts/Services/ICalculateDeliveryService/Dtos/CoordinatesDto";
-import { ICalculateDeliveryService } from "src/constracts/Services/ICalculateDeliveryService/ICalculateDeliveryService";
+import { CoordinatesDto } from "src/contracts/Services/ICalculateDeliveryService/Dtos/CoordinatesDto";
+import { ICalculateDeliveryService } from "src/contracts/Services/ICalculateDeliveryService/ICalculateDeliveryService";
 
 export type Frete = {
   street: string;

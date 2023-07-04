@@ -2,7 +2,7 @@ import { useEffect, useState, useContext } from 'react';
 import styles from './styles.module.css';
 import { formatter } from 'src/utils/formatter';
 import { cartContext } from 'src/contexts/CartContext';
-import { CartItem } from 'src/model/CartItem';
+import { CartItem } from 'src/models/CartItem';
 import { observer } from 'mobx-react-lite';
 
 type Props = {

@@ -1,9 +1,9 @@
 require('dotenv').config();
 
 import axios from 'axios';
-import { AddressDto } from 'src/constracts/Services/ICalculateDeliveryService/Dtos/AddressDto';
-import { CoordinatesDto } from 'src/constracts/Services/ICalculateDeliveryService/Dtos/CoordinatesDto';
-import { ICalculateDeliveryService } from 'src/constracts/Services/ICalculateDeliveryService/ICalculateDeliveryService';
+import { AddressDto } from 'src/contracts/Services/ICalculateDeliveryService/Dtos/AddressDto';
+import { CoordinatesDto } from 'src/contracts/Services/ICalculateDeliveryService/Dtos/CoordinatesDto';
+import { ICalculateDeliveryService } from 'src/contracts/Services/ICalculateDeliveryService/ICalculateDeliveryService';
 
 class CalculateDeliveryService implements ICalculateDeliveryService {
   private readonly viacepUrl: string = "https://viacep.com.br/ws/";

@@ -1,6 +1,13 @@
 .container {
     background-color: #FFF;
 }
+.productImage img {
+    max-width: 100%;
+    height: auto;
+}
+.productImage {
+    overflow: hidden;
+}
 
 .headerArea{
     position: absolute;
