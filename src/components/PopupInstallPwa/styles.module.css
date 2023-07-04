@@ -44,11 +44,13 @@
   margin: 1rem 0;
 }
 
+
+
 .containerPopup button {
   font-size: 1.8rem;
   font-weight: 800;
   text-transform: uppercase;
-  background-color: blue;
+  background-color: #FB9400;
   width: 100%;
   padding: 1.4rem 0;
   border-radius: 0.8rem;
@@ -57,7 +59,7 @@
 }
 
 .containerPopup button:hover {
-  background-color: lightblue;
+  background-color: #f0cc9b;
 }
 
 .containerImg {

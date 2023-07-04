@@ -51,15 +51,9 @@ export const PopupInstallPwa = () => {
                 height="50"
                 alt="Madrugão083"
               />
-              <img
-                src="/img/logo-popup-pwa.png"
-                alt="Madrugão083"
-                width="240"
-                height="50"
-              />
             </div>
             <p>Adicione nosso App à tela inicial!</p>
-            <button onClick={() => handleInstallPwa()}>Adicionar Atalho</button>
+            <button className={styles.button} onClick={() => handleInstallPwa()}>Adicionar Atalho</button>
           </div>
         </div>
       )}
