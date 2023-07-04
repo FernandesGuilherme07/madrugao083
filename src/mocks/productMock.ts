@@ -7,7 +7,7 @@ export const productsMock: Product[] = [
         categoryName: "Burguers",
         image: "/temp/smash.png",
         name: "Burguer Smash",
-        price: 13.90,
+        price: 14.90,
         aditionals: [
         {
             id: 1,
@@ -47,7 +47,7 @@ export const productsMock: Product[] = [
         categoryName: "Burguers",
         image: "/temp/double-smash.png",
         name: "Double Smash",
-        price: 19.90,
+        price: 21.90,
         aditionals: [
         {
             id: 1,
@@ -127,7 +127,7 @@ export const productsMock: Product[] = [
         categoryName: "Burguers",
         image: "/temp/especial.png",
         name: "Especial da Casa",
-        price: 21.90,
+        price: 23.90,
         aditionals: [
             {
                 id: 1,
@@ -167,7 +167,7 @@ export const productsMock: Product[] = [
         categoryName: "Vitaminas",
         image: "/temp/vitamina-acai.png",
         name: "Vitamina de açaí 550ml",
-        price: 8.90
+        price: 10.90
     },
     {
         id: 6,
@@ -175,7 +175,7 @@ export const productsMock: Product[] = [
         categoryName: "Vitaminas",
         image: "/temp/vitamina-acai.png",
         name: "Vitamina de açaí 350ml",
-        price: 6.90
+        price: 7.90
     },
     {
         id: 7,
@@ -183,7 +183,7 @@ export const productsMock: Product[] = [
         categoryName: "Vitaminas",
         image: "/temp/vitamina-cupuacu.png",
         name: "Vitamina de cupuaçú 550ml",
-        price: 8.90
+        price: 10.90
     },
     {
         id: 8,
@@ -191,7 +191,7 @@ export const productsMock: Product[] = [
         categoryName: "Vitaminas",
         image: "/temp/vitamina-cupuacu.png",
         name: "Vitamina de cupuaçú 350ml",
-        price: 6.90
+        price: 7.90
     },
     {
         id: 9,
@@ -199,15 +199,7 @@ export const productsMock: Product[] = [
         categoryName: "Vitaminas",
         image: "/temp/vitamina-acai.png",
         name: "Vitamina de açaí com cupuaçú 550ml",
-        price: 8.90
-    },
-    {
-        id: 10,
-        description: "Creme de açaí, creme de cupuaçú, banana, leite em pó e xarope de guaraná",
-        categoryName: "Vitaminas",
-        image: "/temp/vitamina-acai.png",
-        name: "Vitamina de açaí com cupuaçú 350ml",
-        price: 6.90
+        price: 12.00
     },
     {
         id: 11,
@@ -257,7 +249,7 @@ export const productsMock: Product[] = [
         categoryName: "Combos",
         description: "Três Burguers(double smash, big bacon e especial da casa) + porção de molho especial extra + duas coca-colas lata",
         name: "Combo Trio Da Madrugada",
-        price: 59.90,
+        price: 62.90,
     },
     {   
         id: 18,
@@ -265,7 +257,7 @@ export const productsMock: Product[] = [
         categoryName: "Combos",
         name: "Combo Festa do pijama",
         description: "Três Smashs Burguers + coca lata + vitamina de cupuaçú",
-        price: 40.90,
+        price: 43.90,
     },
     {   
         id: 19,
@@ -273,7 +265,7 @@ export const productsMock: Product[] = [
         categoryName: "Combos",
         name: "Combo Proibidão",
         description: "Dois Big Burguers + 2 budweiser long neck + porção de bacon extra",
-        price: 44.90,
+        price: 45.90,
     },
 
 ];
