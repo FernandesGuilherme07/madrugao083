@@ -66,7 +66,7 @@ const Cart = () => {
     try {
       const deliveryInfo = await deliveryStore.CalculateFreightAndHandleLocale(shippingInput.replace(/-/g, ''));
 
-      if(!EstablishmentIsOpen()) {
+      if(EstablishmentIsOpen()) {
         window.alert("Hamburgueria fechada no momento, abre novamente às 22horas.")   
         setLoadingVisible(false);
       } 
