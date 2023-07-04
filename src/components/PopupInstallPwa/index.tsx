@@ -43,9 +43,10 @@ export const PopupInstallPwa = () => {
           <div>
             <div className={styles.containerImg}>
               <span onClick={() => closePopup()}>
-                <Close />
+                X
               </span>
               <img
+                className={styles.img}
                 src="/temp/AVATAR.png"
                 width="50"
                 height="50"
@@ -60,21 +61,3 @@ export const PopupInstallPwa = () => {
     </>
   );
 };
-
-const Close = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="2.6rem"
-    height="2.6rem"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
-    <circle cx="12" cy="12" r="10"></circle>
-    <line x1="15" y1="9" x2="9" y2="15"></line>
-    <line x1="9" y1="9" x2="15" y2="15"></line>
-  </svg>
-);
