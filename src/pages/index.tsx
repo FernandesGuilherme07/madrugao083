@@ -15,6 +15,7 @@ import { GetServerSideProps } from 'next';
 import { establishmentMock } from 'src/mocks/establishmentMock';
 import { EstablishmentIsOpen } from 'src/utils/EstablishmentIsOpen';
 import { PopupInstallPwa } from 'src/components/PopupInstallPwa';
+import { Banner } from 'src/components/Banner';
 
 
 const Home = observer(({ products }: props) => {
@@ -109,7 +110,7 @@ const Home = observer(({ products }: props) => {
 
             {!searchText && (
               <>
-                {/* <Banner /> */}
+                <Banner /> 
                 <div className={styles.categories}>
                   {categories.map((category, index) => (
                     <button
