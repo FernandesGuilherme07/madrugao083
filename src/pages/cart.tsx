@@ -66,7 +66,7 @@ const Cart = () => {
     try {
       const deliveryInfo = await deliveryStore.CalculateFreightAndHandleLocale(shippingInput.replace(/-/g, ''));
 
-      if (deliveryInfo) {
+     if (deliveryInfo) {
         setAddressValid(true);
         setShippingAddress(`${deliveryInfo.street} - ${deliveryInfo.neighborhood} - ${deliveryInfo.localidade}`);
         setShippingPrice(deliveryInfo.PriceDelivery + 2);
