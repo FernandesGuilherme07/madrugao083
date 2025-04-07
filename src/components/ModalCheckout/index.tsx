@@ -103,7 +103,7 @@ export const ModalCheckout = observer(({ onClose, shippingAddress, shippingTime,
       setLoadingVisible(true);
       setTimeout(() => {
         try {
-          window.open(`https://api.whatsapp.com/send?phone=${numeroWhatsApp}&text=${mensagemEncoded}`);
+          window.open(`https://wa.me/${numeroWhatsApp}?text=${mensagemEncoded}`);
          
         } catch (error) {
           console.log(error)
