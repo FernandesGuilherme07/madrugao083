@@ -66,17 +66,7 @@ const Cart = () => {
     try {
       const deliveryInfo = await deliveryStore.CalculateFreightAndHandleLocale(shippingInput.replace(/-/g, ''));
 
-      if(!EstablishmentIsOpen()) {
-        window.alert("Hamburgueria fechada no momento, abre novamente às 22horas.")   
-        setLoadingVisible(false);
-      } 
-      else if (deliveryInfo && deliveryInfo.PriceDelivery > 20) {
-        setShippingAddress(` ${deliveryInfo.street} - ${deliveryInfo.neighborhood} - ${deliveryInfo.localidade}`);
-        setShippingPrice(0.00);
-        setShippingTime(0);
-        setLoadingVisible(false);
-        window.alert("Frete indisponível para essa localidade!");
-      } else if (deliveryInfo) {
+     if (deliveryInfo) {
         setAddressValid(true);
         setShippingAddress(`${deliveryInfo.street} - ${deliveryInfo.neighborhood} - ${deliveryInfo.localidade}`);
         setShippingPrice(deliveryInfo.PriceDelivery + 2);
