@@ -84,7 +84,6 @@ const ProductPage = observer(({ product }: Props) => {
     const { id } = product;
     const totalPrice = cartStore.PriceToProductWithAdicional(id);
 
-  
     await cartStore.AddItem({
       id: UniqueIdGenerator.generateUniqueId(),
       productId: id,
@@ -94,10 +93,6 @@ const ProductPage = observer(({ product }: Props) => {
       qt: qtCount,
     });
     
-    // Atualizar o console.log para acessar o getter totalPrice após adicionar o item
-    console.log(cartStore.totalPrice);
-  
-    // going to cart
     router.push(`/cart`);
   };
   

@@ -48,11 +48,11 @@ export const CartProductItem = observer(({ color, quantity, productId, cartId, o
                 <div className={styles.productCategory}>{product.categoryName}</div>
                 <div className={styles.productName}>{product.name}</div>
                 {cart?.aditionals ? cart.aditionals.map((aditional) =>(
-                   <>
+                   <div key={aditional.id}>
                       <div key={aditional.id} className={styles.productCategory}>
                         + {aditional.name}
                       </div>
-                   </>
+                   </div>
                 )) : null}
                 {cart?.aditionals &&(
                    <br />

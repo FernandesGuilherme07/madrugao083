@@ -1,6 +1,6 @@
 
 import { UniqueIdGenerator } from 'src/utils/UniqueIdGenerator';
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { FaMoneyBillAlt, FaCreditCard } from "react-icons/fa";
 import { MdPix } from "react-icons/md";
 require('dotenv').config();
@@ -14,6 +14,7 @@ import { formatMinutesToHours } from 'src/utils/formatMinutesToHours';
 import { useRouter } from 'next/router';
 import { establishmentMock } from 'src/mocks/establishmentMock';
 import { LoadingApp } from '../LoadingApp/LoadingApp';
+import { set } from 'lodash';
 
 type Props = {
   shippingAddress: string;
@@ -26,6 +27,7 @@ type FormData = Record<string, any>;
 
 export const ModalCheckout = observer(({ onClose, shippingAddress, shippingTime, shippingPrice }: Props) => {
   const { itens, totalPrice, ClearCart } = useContext(cartContext);
+  const [enableButtom, setEnableButtom] = useState(false);
   const [formData, setFormData] = useState<FormData>({
     addressNumber: "",
     complement: "",
@@ -42,7 +44,51 @@ export const ModalCheckout = observer(({ onClose, shippingAddress, shippingTime,
     isPaused: false
   });
 
+  useEffect(() => {
+    const isFormValid = validateForm();
+    isFormValid ? setEnableButtom(true) : setEnableButtom(false);
+  },[formData]);
   const useFormatter = formatter();
+
+  const buildMensagemEncoded = () => {
+    const itemsMessage = itens.map((item) => {
+      const aditionalsMessage = item.aditionals
+        ? item.aditionals
+            .map((aditional) => `${aditional.name} - ${useFormatter.formatPrice(aditional.price)}`)
+            .join(", ")
+        : "";
+  
+      return `
+Produto: ${item.prdouctName}
+Quantidade: ${item.qt}
+Preço: ${useFormatter.formatPrice(item.productPrice)}
+Adicionais: ${aditionalsMessage ?? "---" }
+  `;
+    });
+  
+    const trocoMessage =
+      formData.paymentMethod === "dinheiro"
+        ? `Troco para: ${formData.changeAmount}`
+        : "";
+  
+    const mensagem = `Pedido Nº ${UniqueIdGenerator.generateUniqueId()}:
+  
+Nome: ${formData.name}
+Endereço: ${shippingAddress}, ${formData.addressNumber} ${formData.complement}
+Ponto de referência: ${formData.reference}
+Tempo de entrega: ${formatMinutesToHours(shippingTime)}
+Tipo de pagamento: ${formData.paymentMethod}
+${trocoMessage}
+
+Itens:
+${itemsMessage.join("\n")}
+Subtotal: ${useFormatter.formatPrice(totalPrice)}
+Preço da entrega: ${useFormatter.formatPrice(shippingPrice)}
+Total: ${useFormatter.formatPrice(shippingPrice + totalPrice)}`;
+
+  const numeroWhatsApp = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER;
+      return `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensagem)}`;
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;
@@ -56,89 +102,32 @@ export const ModalCheckout = observer(({ onClose, shippingAddress, shippingTime,
   const router = useRouter();
   
   const handleEnviarPedido = () => {
-    const isFormValid = validateForm();
-  
-    if (isFormValid) {
-      const itemsMessage = itens.map((item) => {
-        const aditionalsMessage = item.aditionals
-          ? item.aditionals
-              .map((aditional) => `${aditional.name} - ${useFormatter.formatPrice(aditional.price)}`)
-              .join(", ")
-              .replace(/\n/g, "\n ")
-          : "";
-  
-        return `
-  Produto: ${item.prdouctName}
-  Quantidade: ${item.qt}
-  Preço: ${useFormatter.formatPrice(item.productPrice)}
-  Adicionais:
-   ${aditionalsMessage}
-  `;
-      });
-  
-      let trocoMessage = "";
-      if (formData.paymentMethod === "dinheiro") {
-        trocoMessage = `Troco para: ${formData.changeAmount}`;
-      }
-  
-      const mensagem = `Pedido Nº ${UniqueIdGenerator.generateUniqueId()}:
-  
-  Nome: ${formData.name}
-  Endereço: ${shippingAddress}, ${formData.addressNumber} ${formData.complement}
-  Ponto de referência: ${formData.reference}
-  Tempo de entrega: ${formatMinutesToHours(shippingTime)}
-  Tipo de pagamento: ${formData.paymentMethod}
-  ${trocoMessage}
-  
-  Itens:
-  ${itemsMessage.join("\n")}
-  Subtotal: ${useFormatter.formatPrice(totalPrice)}
-  Preço da entrega: ${useFormatter.formatPrice(shippingPrice)}
-  Total: ${useFormatter.formatPrice(shippingPrice + totalPrice)}`;
-  
-      const mensagemEncoded = encodeURIComponent(mensagem);
-      const numeroWhatsApp = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER;
-  
-      ClearCart();
       setLoadingVisible(true);
-      setTimeout(() => {
-        try {
-          window.open(`https://wa.me/${numeroWhatsApp}?text=${mensagemEncoded}`);
-         
-        } catch (error) {
-          console.log(error)
-        }
-      }, 4500);
-      setTimeout(() => {
-        setFormData({
-          addressNumber: "",
-          complement: "",
-          reference: "",
-          contactNumber: "",
-          name: "",
-          paymentMethod: "",
-          changeOption: false,
-          changeAmount: "",
-        });
-        setLoadingVisible(false);
-        router.push("/");
-      }, 6000);
-    } else {
-      window.alert("Preencha os campos corretamente");
-    }
+      setFormData({
+        addressNumber: "",
+        complement: "",
+        reference: "",
+        contactNumber: "",
+        name: "",
+        paymentMethod: "",
+        changeOption: false,
+        changeAmount: "",
+      });
+      setLoadingVisible(false);
+      ClearCart();
+      onClose();
+      router.push("/");
   };
     
 
   const validateForm = () => {
-    const requiredFields = ["name", "contactNumber", "addressNumber", "reference"];
-    const isFormValid = requiredFields.every((field) => formData[field].trim() !== "");
+    const requiredFields = ["name", "contactNumber", "addressNumber", "reference", "paymentMethod"];
+    const isFormValid = requiredFields.every((field) => !!formData[field].trim());
     return isFormValid;
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
     handleEnviarPedido();
-    onClose();
   };
 
   const handleButtonClick = (paymentMethod: string) => {
@@ -290,12 +279,31 @@ export const ModalCheckout = observer(({ onClose, shippingAddress, shippingTime,
                 </div>
               )}
               <div className={styles.buttonArea}>
-                <Button
-                  color={establishmentMock.primaryColor}
-                  label="Enviar Pedido"
-                  onClick={() => handleEnviarPedido()}
-                  fill
-                />
+                {!enableButtom ? (
+                  <Button
+                    color={"grey"}
+                    label="Enviar Pedido"
+                    onClick={() => {}}
+                    disabled={!enableButtom}
+                  />
+                ) : (
+                    <a
+                      href={buildMensagemEncoded()}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => {
+                        handleEnviarPedido();
+                      }}
+                      style={{ textDecoration: "none" }}
+                    >                
+                      <Button
+                        color={establishmentMock.primaryColor}
+                        label="Enviar Pedido"
+                        onClick={() => {}}
+                        fill
+                      />
+                    </a>
+                )}
               </div>
             </form>
           </div>

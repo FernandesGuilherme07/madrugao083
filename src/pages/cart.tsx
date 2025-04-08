@@ -16,7 +16,6 @@ import { deliveryStore } from 'src/containers/Delivery';
 import { LoadingDelivery } from 'src/components/LoadingDelivery/LoadingDelivery';
 import { ModalCheckout } from 'src/components/ModalCheckout';
 import { establishmentMock } from 'src/mocks/establishmentMock';
-import { EstablishmentIsOpen } from 'src/utils/EstablishmentIsOpen';
 
 const Cart = () => {
   // Shipping
@@ -77,7 +76,6 @@ const Cart = () => {
     } catch (error) {
       setLoadingVisible(false);
       window.alert("CEP inválido!");
-      console.error("Error:", error);
     }
   };
 
